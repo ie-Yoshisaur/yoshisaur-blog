@@ -1,0 +1,24 @@
+[
+  {
+    "name": "terminal",
+    "black": "#222225",
+    "red": "#ff3c74",
+    "green": "#62c4ff",
+    "yellow": "#a3abba",
+    "blue": "#62c4ff",
+    "purple": "#a3abba",
+    "cyan": "#62c4ff",
+    "white": "#e8e9ed",
+    "brightBlack": "#3f3f44",
+    "brightRed": "#ff3c74",
+    "brightGreen": "#62c4ff",
+    "brightYellow": "#a3abba",
+    "brightBlue": "#62c4ff",
+    "brightPurple": "#a3abba",
+    "brightCyan": "#62c4ff",
+    "brightWhite": "#e8e9ed",
+    "foreground": "#e8e9ed",
+    "background": "#222225",
+    "cursorColor": "#e8e9ed"
+  }
+]

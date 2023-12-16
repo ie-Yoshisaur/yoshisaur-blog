@@ -1,0 +1,31 @@
+.blog {
+    position: relative;
+    overflow: auto;
+    height: 100vh;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.cite-title {
+    text-align: center;
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+h3 {
+    font-size: 1.17em;
+}
+
+pre {
+    border: 1px solid;
+}
+
+.blog-post a,
+.blog-post Link,
+.cite-title a,
+.cite-title Link {
+    color: inherit;
+}

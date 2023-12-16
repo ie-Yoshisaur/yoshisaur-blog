@@ -1,0 +1,57 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+* {
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+    DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace,
+    serif;
+}
+
+html,
+body,
+body>div:first-child,
+div#__next,
+div#__next>div {
+  height: 100%;
+  overflow: auto;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 599px) {
+  html {
+    font-size: 50%;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 799px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+
+@media screen and (min-width: 800px) and (max-width: 999px) {
+  html {
+    font-size: 75%;
+  }
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1199px) {
+  html {
+    font-size: 87.5%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  html {
+    font-size: 100%;
+  }
+}
