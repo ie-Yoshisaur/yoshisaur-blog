@@ -63,7 +63,7 @@ export default function Post({ content, data }: PostProps) {
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const files = fs.readdirSync(path.join(process.cwd(), 'src/pages/blog'));
-    const paths = files.map(filename => ({
+    const paths = files.filter(filename => filename.endsWith('.md')).map(filename => ({
         params: { slug: filename.replace('.md', '') },
     }));
 
