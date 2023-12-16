@@ -61,7 +61,6 @@ export const getStaticProps: GetStaticProps = async () => {
         const { data } = matter(markdownWithMetadata);
 
         if (!data.title || !data.date || isNaN(new Date(data.date).getTime())) {
-            console.error(`The file ${filename} does not have a title and a valid date in its frontmatter.`);
             return null;
         }
 
