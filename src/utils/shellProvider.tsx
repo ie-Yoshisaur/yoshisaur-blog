@@ -27,10 +27,13 @@ export const ShellProvider: React.FC<ShellProviderProps> = ({ children }) => {
   const [history, _setHistory] = React.useState<History[]>([]);
   const [command, _setCommand] = React.useState<string>('');
   const [lastCommandIndex, _setLastCommandIndex] = React.useState<number>(0);
+  const [commands, setCommands] = React.useState<string[]>(['whoami', 'tree']);
 
   useEffect(() => {
-    setCommand('whoami');
-  }, []);
+    if (commands.length > 0) {
+      setCommand(commands[0]);
+    }
+  }, [commands]);
 
   useEffect(() => {
     if (!init) {
@@ -52,7 +55,7 @@ export const ShellProvider: React.FC<ShellProviderProps> = ({ children }) => {
 
   const setCommand = (command: string) => {
     _setCommand([Date.now(), command].join(' '));
-
+    setCommands(commands.slice(1));
     setInit(false);
   };
 
@@ -87,6 +90,10 @@ export const ShellProvider: React.FC<ShellProviderProps> = ({ children }) => {
           }
         }
       }
+    }
+
+    if (commands.length > 0) {
+      setCommand(commands[0]);
     }
   };
 

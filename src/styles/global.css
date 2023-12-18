@@ -30,11 +30,19 @@ div#__next>div {
   html {
     font-size: 50%;
   }
+
+  .github-contribution-calendar {
+    width: 250px;
+  }
 }
 
 @media screen and (min-width: 600px) and (max-width: 799px) {
   html {
     font-size: 62.5%;
+  }
+
+  .github-contribution-calendar {
+    width: 300px;
   }
 }
 
@@ -42,16 +50,28 @@ div#__next>div {
   html {
     font-size: 75%;
   }
+
+  .github-contribution-calendar {
+    width: 500px;
+  }
 }
 
 @media screen and (min-width: 1000px) and (max-width: 1199px) {
   html {
     font-size: 87.5%;
   }
+
+  .github-contribution-calendar {
+    width: 550px;
+  }
 }
 
 @media screen and (min-width: 1200px) {
   html {
     font-size: 100%;
+  }
+
+  .github-contribution-calendar {
+    width: 650px;
   }
 }
