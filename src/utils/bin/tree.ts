@@ -11,6 +11,7 @@ export const tree = async (args?: string[]): Promise<string> => {
 .
 ├── <a href="https://github.com/ie-Yoshisaur">github</a>
 ├── <a href="https://twitter.com/ie_Yoshisaur">x_twitter</a>
+├── <a href="/resume.html">resume</a>
 └── <a href="/blog">blog</a>
 ${blogLinks}
 `;

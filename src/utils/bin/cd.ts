@@ -11,6 +11,9 @@ export const cd = (args?: string[]): string => {
         case 'x_twitter':
             url = 'https://twitter.com/ie_Yoshisaur';
             break;
+        case 'resume':
+            url = '/resume.html';
+            break;
         default:
             return `No such file or directory: ${args[0]}`;
     }

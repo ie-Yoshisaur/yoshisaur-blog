@@ -17,6 +17,10 @@ export const ls = async (args?: string[]): Promise<string> => {
                 url = 'https://twitter.com/ie_Yoshisaur';
                 window.location.href = url;
                 break;
+            case 'resume':
+                url = '/resume.html';
+                window.location.href = url;
+                break;
             default:
                 return `No such file or directory: ${args[0]}`;
         }

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>resume</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <style type="text/css">
+  /*
+   * Copyright 2013 Christophe-Marie Duquesne <chmd@chmd.fr>
+   *
+   * CSS for making a resume with pandoc. Inspired by moderncv.
+   *
+   * This CSS document is delivered to you under the CC BY-SA 3.0 License.
+   * https://creativecommons.org/licenses/by-sa/3.0/deed.en_US
+   */
+
+  /* Whole document */
+  body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      max-width: 800px;
+      margin: auto;
+      background: #FFFFFF;
+      padding: 10px 10px 10px 10px;
+  }
+
+  /* Title of the resume */
+  h1 {
+      font-size: 55px;
+      color: #757575;
+      text-align:center;
+      margin-bottom:15px;
+  }
+  /* h1:hover { */
+  /*     background-color: #757575; */
+  /*     color: #FFFFFF; */
+  /*     text-shadow: 1px 1px 1px #333; */
+  /* } */
+
+  /* Titles of categories */
+  h2 {
+      /* This is called "sectioncolor" in the ConTeXt stylesheet. */
+      color: #397249;
+  }
+  /* There is a bar just before each category */
+  h2:before {
+      content: "";
+      display: inline-block;
+      margin-right:1%;
+      width: 16%;
+      height: 10px;
+      /* This is called "rulecolor" in the ConTeXt stylesheet. */
+      background-color: #9CB770;
+  }
+  /* h2:hover { */
+  /*     background-color: #397249; */
+  /*     color: #FFFFFF; */
+  /*     text-shadow: 1px 1px 1px #333; */
+  /* } */
+
+  /* Definitions */
+  dt {
+      float: left;
+      clear: left;
+      width: 17%;
+      font-weight: bold;
+  }
+  dd {
+      margin-left: 17%;
+      margin-bottom:7px;
+  }
+  p {
+      margin-top:0;
+      margin-bottom:7px;
+  }
+
+  /* Blockquotes */
+  blockquote {
+      text-align: center
+  }
+
+  /* Links */
+  a {
+      text-decoration: none;
+      color: #397249;
+  }
+  a:hover, a:active {
+      background-color: #397249;
+      color: #FFFFFF;
+      text-decoration: none;
+      text-shadow: 1px 1px 1px #333;
+  }
+
+  /* Horizontal separators */
+  hr {
+      color: #A6A6A6;
+  }
+
+  table {
+      width: 100%;
+  }
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="yoshiaki-sano">Yoshiaki Sano</h1>
+<hr />
+<blockquote>
+<p>Software Engineer from Okinawa, Japan with language exchange
+experience in English during high school. Currently studying at Ryukyu
+University, expected to obtain a Bachelor’s degree in Information
+Engineering. Born in 2000, 23 years old. Biologically male, pronouns are
+He/Him.</p>
+</blockquote>
+<hr />
+<h2 id="education">Education</h2>
+<dl>
+<dt>2015-2018</dt>
+<dd>
+<strong>English Language Exchange Student</strong>; Mount Douglas
+Secondary School, Victoria, B.C., Canada
+</dd>
+<dt>2020-2024 (expected)</dt>
+<dd>
+<p><strong>BSc, Computer Science, Intelligence Information
+Course</strong>; Engineering Department, Intelligence Information
+Course, Ryukyu University, Okinawa, Japan</p>
+<p><em>Research: Database Implementation in Parallel Trust
+Laboratory</em></p>
+</dd>
+</dl>
+<h2 id="experience">Experience</h2>
+<dl>
+<dt>2021-2023</dt>
+<dd>
+<strong>Software Engineer at Chura Data:</strong>
+</dd>
+</dl>
+<p>Worked on building web applications and performing data analysis.</p>
+<dl>
+<dt>2022-2023</dt>
+<dd>
+<strong>Research at a Certain Graduate University:</strong>
+</dd>
+</dl>
+<p>Involved in the entire software development lifecycle, from
+requirements definition and detailed design to implementation and
+testing, for a video editing software for research purposes in a lab.
+The name of the lab is kept confidential due to contractual
+obligations.</p>
+<h2 id="technical-experience">Technical Experience</h2>
+<dl>
+<dt><strong>Self-made Database Management System in Rust</strong></dt>
+<dd>
+<p>Developed a database management system from scratch using Rust. The
+system includes:</p>
+<ul>
+<li>SQL compatibility: The system can interpret and execute SQL
+commands.</li>
+<li>Transaction implementation: The system supports database
+transactions to ensure data integrity.</li>
+<li>B-tree implementation: Used B-trees for efficient data storage and
+retrieval.</li>
+</ul>
+<p>Repository : https://github.com/ie-Yoshisaur/OxideDB</p>
+</dd>
+</dl>
+<p><strong>Web and Desktop Application Development</strong> :</p>
+<pre><code>* Front-end: React, Vue, and vanilla TS/JS.
+* Back-end: Rust, Golang, Python, and Node.js.
+* Database: PostgreSQL.
+* Other: Git, Docker, Tauri, Web Assembly.</code></pre>
+<p><strong>Performance Tuning Contest</strong> : Participated in ISUCON,
+a Japanese team contest aimed at tuning and accelerating the same web
+application. My responsibilities included:</p>
+<pre><code> * MySQL slow query analysis
+ * Index optimization
+ * N+1 query resolution</code></pre>
+<p>Achieved a ranking of 101 out of 700 teams.</p>
+<dl>
+<dt><strong>Education Network for Practical Information Technologies
+(enPIT) Project</strong></dt>
+<dd>
+<ul>
+<li>Participated in an educational project supported by the Ministry of
+Education, Culture, Sports, Science and Technology in Japan.</li>
+<li>Participated in a team project that involved agile development to
+create a system that recommends clothing based on a person’s skeletal
+type.</li>
+<li>As a product owner, I strategically created a product backlog to
+enhance the value of the application, considering the development
+capabilities of the team and the functional requirements.</li>
+<li>The project received the “Idea Award”.</li>
+</ul>
+</dd>
+</dl>
+<h2 id="other-skills">Other Skills</h2>
+<ul>
+<li>Human Languages:
+<ul>
+<li>Japanese (native speaker)</li>
+<li>English (CEFR B2)</li>
+</ul></li>
+</ul>
+<hr />
+<blockquote>
+<p><a href="mailto:yoshiaki.sano.personal@gmail.com"
+class="email">yoshiaki.sano.personal@gmail.com</a></p>
+</blockquote>
+</body>
+</html>
