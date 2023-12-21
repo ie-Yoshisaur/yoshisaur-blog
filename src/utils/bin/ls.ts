@@ -1,6 +1,6 @@
 export const ls = async (args?: string[]): Promise<string> => {
     if (!args || !args.length) {
-        return ` <a href="/blog">blog</a>   <a href="https://github.com/ie-Yoshisaur">github</a>    <a href="https://twitter.com/ie_Yoshisaur">x_twitter</a>`;
+        return ` <a href="/blog">blog</a>   <a href="https://github.com/ie-Yoshisaur">github</a>    <a href="/resume.html">resume</a>    <a href="https://twitter.com/ie_Yoshisaur">x_twitter</a>`;
     } else {
         let url = '';
         const arg = args[0].replace(/^(\.\/|~\/)/, '');
