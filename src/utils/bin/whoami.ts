@@ -21,7 +21,7 @@ I'm a fast learner and a team player 🤝.
 
 I'm always looking for new challenges and opportunities to grow 💪.
 
-I can speak English because I spent 3 years in Canada 🇨🇦 during high school.
+I can speak English because I graduated after studying for 3 years in Canada 🇨🇦 during high school.
 
 
 <div style="font-size: 1.5em;">My work:</div>
