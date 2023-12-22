@@ -1,6 +1,7 @@
 ---
 title: 'My New Terminal-like Website'
 date: 2023-12-17
+tags: []
 ---
 
 ## Why I made it

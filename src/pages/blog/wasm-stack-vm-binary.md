@@ -1,6 +1,7 @@
 ---
 title: 'WebAssembly: Understanding Stack, VM, and Binary Mechanics'
-date: 2023-12-22
+date: 2023-12-01
+tags: ['webassembly']
 ---
 
 ## 1. WebAssembly

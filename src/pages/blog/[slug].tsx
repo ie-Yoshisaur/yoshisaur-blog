@@ -19,6 +19,7 @@ interface PostProps {
         title: string;
         date: string;
         filename: string;
+        tags: string[];
     };
 }
 
@@ -52,6 +53,15 @@ export default function Post({ content, data }: PostProps) {
             <br />
             <h2>{data.title}</h2>
             <p>{data.date}</p>
+            {data.tags.map((tag, index) => (
+                <span key={index}>
+                    {index === 0 && 'tags: '}
+                    <Link href={`/blog?tag=${tag}`}>
+                        {tag}
+                    </Link>
+                    {index < data.tags.length - 1 && ', '}
+                </span>
+            ))}
             <hr />
             <div dangerouslySetInnerHTML={{ __html: content }} />
             <hr />
@@ -92,6 +102,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
                 title: parsedMarkdown.data.title,
                 date: new Date(parsedMarkdown.data.date).toISOString().split('T')[0],
                 filename: params.slug,
+                tags: parsedMarkdown.data.tags,
             },
         },
     };

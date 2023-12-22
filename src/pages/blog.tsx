@@ -4,11 +4,13 @@ import matter from 'gray-matter';
 import Link from 'next/link';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 interface Post {
     slug: string;
     title: string;
     date: string;
+    tags: string[];
 }
 
 interface BlogProps {
@@ -16,6 +18,11 @@ interface BlogProps {
 }
 
 export default function Blog({ posts }: BlogProps) {
+    const router = useRouter();
+    const tag = router.query.tag as string;
+
+    const filteredPosts = tag ? posts.filter(post => post.tags.includes(tag)) : posts;
+
     return (
         <div className='blog'>
             <Head>
@@ -34,17 +41,22 @@ export default function Blog({ posts }: BlogProps) {
                     blog
                 </Link>
             </h1>
-            {posts.map((post) => (
-                <div key={post.slug} className='blog-post'>
-                    <Link href={`/blog/${post.slug}`}>
-                        <div className='post-container'>
-                            <div className='post-title'>{post.title}</div>
-                            <div className='post-dots'></div>
-                            <div className='post-date'>{post.date}</div>
-                        </div>
-                    </Link>
-                </div>
-            ))}
+            {tag && <h2>Tag: {tag}</h2>}
+            {filteredPosts.length > 0 ? (
+                filteredPosts.map((post) => (
+                    <div key={post.slug} className='blog-post'>
+                        <Link href={`/blog/${post.slug}`}>
+                            <div className='post-container'>
+                                <div className='post-title'>{post.title}</div>
+                                <div className='post-dots'></div>
+                                <div className='post-date'>{post.date}</div>
+                            </div>
+                        </Link>
+                    </div>
+                ))
+            ) : (
+                <p>There are no posts with this tag.</p>
+            )}
         </div>
     );
 }
@@ -68,6 +80,7 @@ export const getStaticProps: GetStaticProps = async () => {
             slug,
             title: data.title,
             date: new Date(data.date).toISOString().split('T')[0],
+            tags: data.tags || [],
         };
     }).filter(Boolean);
 
