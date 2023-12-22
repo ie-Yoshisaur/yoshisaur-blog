@@ -1,4 +1,7 @@
-# WebAssembly: Understanding Stack, VM, and Binary Mechanics
+---
+title: 'WebAssembly: Understanding Stack, VM, and Binary Mechanics'
+date: 2023-12-22
+---
 
 ## 1. WebAssembly
 
@@ -50,7 +53,7 @@ I will explain the calculation flow on Wasm's virtual machine using the WebAssem
 
 Prepare a wat file like the following (file name: `calculate.wat`). The content is the function of the previous `5 * (3 + 4)` and made it `x * (y + z)`.
 
-```
+```txt
 (module
   (func (export "calculate") (param $x i32) (param $y i32) (param $z i32) (result i32)
     local.get $x
@@ -78,7 +81,6 @@ Execute `$ wat2wasm calculate.wat` to generate `calculate.wasm`.
 To use this wasm file, create an html file and a js file. Please place all in the same directory.
 
 index.html
-
 ```html
 <!DOCTYPE html>
 <html>
@@ -98,7 +100,6 @@ index.html
 ```
 
 main.js
-
 ```javascript
 async function calculate() {
     const x = document.getElementById('x').value;
@@ -116,7 +117,7 @@ Please execute `$ python3 -m http.server 8000`.
 
 Open `http://localhost::8000` and input x = 5, y = 3, z = 4 to get the calculation result.
 
-![wasm-demo](/public/images/wasm-stack-vm-binary/wasm-demo.png)
+![wasm-demo](/images/wasm-stack-vm-binary/wasm-demo.png)
 
 I think you will get a result like this image.
 
@@ -130,7 +131,7 @@ Execute `$ cargo init rust-wasm`.
 
 Add the following line to `Cargo.toml` (version is the latest at the time of blog publication)
 
-```
+```yaml
 [dependencies]
 wasmer = "4.2.4"
 ```
@@ -140,7 +141,6 @@ Create a `wasm` directory in `rust-wasm` and place the wasm file.
 Write `main.rs` as follows.
 
 ```rust
-// Import env and fs::read from the standard library.
 use std::env;
 use std::fs::read;
 // Import the necessary things from wasmer. This is a library for handling WebAssembly.
@@ -191,7 +191,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 If you execute `$ cargo 5 3 4`, you will get the following output.
 
-```
+```txt
 $ cargo run 5 3 4
     Finished dev [unoptimized + debuginfo] target(s) in 0.12s
      Running `target/debug/rust-wasm 5 3 4`
@@ -214,7 +214,7 @@ Let's display the binary file in hexadecimal using the `xxd` command.
 
 `$ xxd calculate.wasm`
 
-```
+```txt
 00000000: 0061 736d 0100 0000 0108 0160 037f 7f7f  .asm.......`....
 00000010: 017f 0302 0100 070d 0109 6361 6c63 756c  ..........calcul
 00000020: 6174 6500 000a 0c01 0a00 2000 2001 2002  ate....... . . .
@@ -225,7 +225,7 @@ This doesn't tell us much about the contents, so let's use a dedicated command.
 
 Let's read the binary file by executing `$ wasm-objdump -s calculate.wasm`.
 
-```
+```txt
 $ wasm-objdump --full-contents calculate.wasm
 
 calculate.wasm: file format wasm 0x1

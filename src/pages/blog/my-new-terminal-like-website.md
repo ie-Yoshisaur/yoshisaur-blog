@@ -10,5 +10,5 @@ I made it because I thought it would be cool if I could. That's all!
 ## Tada!
 
 ```javascript
-console.log("Look at this highlighted js code! Very Ecchi!");
+console.log("Look at this highlighted js code! Very cute!");
 ```

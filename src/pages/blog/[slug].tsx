@@ -8,6 +8,8 @@ import gfm from 'remark-gfm';
 import { useEffect } from 'react';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
+import 'prismjs/components/prism-rust'
+import 'prismjs/components/prism-yaml'
 import Head from 'next/head';
 import Link from 'next/link';
 
