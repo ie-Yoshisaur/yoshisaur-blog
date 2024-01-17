@@ -1,7 +1,7 @@
 import packageJson from '../../../package.json';
 
 export const whoami = (args?: string[]): string => {
-  return `
+ return `
 
 ██╗   ██╗ ██████╗ ███████╗██╗  ██╗██╗███████╗ █████╗ ██╗   ██╗██████╗ 
 ╚██╗ ██╔╝██╔═══██╗██╔════╝██║  ██║██║██╔════╝██╔══██╗██║   ██║██╔══██╗
@@ -29,6 +29,10 @@ I can speak English because I graduated after studying for 3 years in Canada �
 <a href="https://github.com/ie-Yoshisaur/OxideDB">OxideDB</a>
 
   - A relational database written in Rust.
+
+<a href="https://github.com/ie-Yoshisaur/i386-emu">i386-emu</a>
+
+  - An emulator for the Intel 386(i386) CPU architecture witten in Rust.
 
 
 Type 'help' to see list of available commands.
