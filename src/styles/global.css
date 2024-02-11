@@ -27,51 +27,116 @@ div#__next>div {
 }
 
 @media screen and (max-width: 599px) {
-  html {
-    font-size: 50%;
-  }
+    p {
+        font-size: 10px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
 
-  .github-contribution-calendar {
-    width: 250px;
-  }
+    h1 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+
+    h3 {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
 }
 
 @media screen and (min-width: 600px) and (max-width: 799px) {
-  html {
-    font-size: 62.5%;
-  }
+    p {
+        font-size: 12px;
+        line-height: 1.6;
+        margin-bottom: 24px;
+    }
 
-  .github-contribution-calendar {
-    width: 300px;
-  }
+    h1 {
+        font-size: 24px;
+        margin-bottom: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin-bottom: 18px;
+    }
+
+    h3 {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
 }
 
 @media screen and (min-width: 800px) and (max-width: 999px) {
-  html {
-    font-size: 75%;
-  }
+    p {
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 28px;
+    }
 
-  .github-contribution-calendar {
-    width: 500px;
-  }
+    h1 {
+        font-size: 28px;
+        margin-bottom: 28px;
+    }
+
+    h2 {
+        font-size: 24px;
+        margin-bottom: 22px;
+    }
+
+    h3 {
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
 }
 
 @media screen and (min-width: 1000px) and (max-width: 1199px) {
-  html {
-    font-size: 87.5%;
-  }
+    p {
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 32px;
+    }
 
-  .github-contribution-calendar {
-    width: 550px;
-  }
+    h1 {
+        font-size: 32px;
+        margin-bottom: 32px;
+    }
+
+    h2 {
+        font-size: 28px;
+        margin-bottom: 26px;
+    }
+
+    h3 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
 }
 
 @media screen and (min-width: 1200px) {
-  html {
-    font-size: 100%;
-  }
+    p {
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 36px;
+    }
 
-  .github-contribution-calendar {
-    width: 650px;
-  }
+    h1 {
+        font-size: 36px;
+        margin-bottom: 36px;
+    }
+
+    h2 {
+        font-size: 32px;
+        margin-bottom: 30px;
+    }
+
+    h3 {
+        font-size: 28px;
+       
+    }
 }
