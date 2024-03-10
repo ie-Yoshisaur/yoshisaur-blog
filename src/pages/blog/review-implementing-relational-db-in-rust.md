@@ -50,7 +50,7 @@ I am proud of myself for being able to implement this.
 
 # Achievements
 
-## I've grasped the tricks of software development
+## I grasped the tricks of software development
 
 I like the phrase "*Software development is a series of abstractions*," and I've come to understand the meaning of this phrase through my own experience.
 
@@ -59,12 +59,12 @@ but as development progressed, once I abstracted and interfaced the processes ap
 
 The human brain follows a process of abstraction after forgetting, but I realized that by reversing this process in software development, I could make it more efficient, which I feel is a significant achievement for me.
 
-## I've understood transactions
+## I understood transactions
 
 I've come to understand the mechanism of transactions, which are used to maintain data consistency in databases, through implementation.
 This experience has allowed me to understand concepts that are frequently mentioned in documentation but are intuitively difficult to grasp, such as "latches," "locks," "WAL," and "transaction isolation levels," on an implementation basis.
 
-## I was able to build confidence
+## I built confidence
 
 Creating a DB is as labor-intensive as creating a compiler or an OS, so being able to do that level of work as an undergraduate has given me confidence.
 
@@ -146,7 +146,7 @@ The textbook I plan to read is "[Introduction to Concurrent Programming - An App
 I want to take on Round 2.
 I have a rough idea of a design that would suit Rust, so I want to proceed with it while studying concurrent programming.
 
-## I want to create educational material as OSS
+## Create educational material as OSS
 
 I want to increase the number of people who can build their own databases, so I'm thinking of creating hands-on educational material that is accessible to beginners in the very distant future.
 
