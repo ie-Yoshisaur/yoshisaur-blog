@@ -36,7 +36,7 @@ I decided to refer to SimpleDB because having a textbook seemed to match my leve
 
 I implemented a database called [OxideDB](https://github.com/ie-Yoshisaur/OxideDB/tree/main).
 
-The naming went like this: "Rust is rust" → "Rust is an oxide of iron", hence the name OxideDB.
+The naming went like this: "Rust is an oxide of iron" → "OxideDB".
 
 I'm quite fond of the naming itself, but including DB in the name seems to be a common naming anti-pattern that is prone to duplication. Next time, I plan to adopt a method called "[The Pavlo Database Naming Method](https://www.cs.cmu.edu/~pavlo/blog/2020/03/on-naming-a-database-management-system.html)," which involves connecting two unrelated monosyllabic words.
 
