@@ -117,7 +117,7 @@ When you all try your hand at creating your own DB, don't be intimidated by the 
 
 ## Software Design and Implementation are Refined Through Repeated Trials
 
-"*What I made this time served its purpose for understanding and I gained experience, so let's throw it away somewhere with gratitude*" (I made some changes to the original text)
+"*What you made this time served its purpose for understanding and you gained experience, so let's throw it away somewhere with gratitude*" (I made some changes to the original text)
 
 Considering the effort involved in implementing a database, this is quite shocking advice, but it turned out to be beneficial.
 
