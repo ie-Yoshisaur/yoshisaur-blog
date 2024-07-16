@@ -136,7 +136,7 @@
     </div>
 
     <div class="slide">
-        <h2>どうしてもブロッキングな処理をしたい場合はspawn_spawn_blockingを使おう</h2>
+        <h2>どうしてもブロッキングな処理をしたい場合はspawn_blockingを使おう</h2>
         <p>基本的にはtokioのノンブロッキングなAPIを使えば問題はないけど、</p>
             <p>CPUの消費が激しいタスクやブロッキングタスクを実行するときはこれでいい</p>
           <pre><code class="language-rust">
