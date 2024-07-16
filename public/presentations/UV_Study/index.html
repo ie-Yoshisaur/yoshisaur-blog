@@ -197,21 +197,9 @@ fn main() {
 // std::sync
 pub struct MutexGuard&lt;'a, T: ?Sized + 'a&gt;
           </code></pre>
-        <p>Mutex&lt;T&gt;なやつからlock().unwrap()で取れるやつ</p>
+        <p>std::sync::Mutex&lt;T&gt;なやつからlock().unwrap()で取れるやつ</p>
         <p>MutexGuard&lt;'a, T&gt;: ライフタイムパラメータ 'a を持つ。</p>
             <p>Mutexがスコープから外れるとMutexGuardも解放される</p>
-    </div>
-
-    <div class="slide">
-        <h2>これさえ覚えてればいい（MutexGuard2）</h2>
-          <pre><code class="language-rust">
-// tokio::sync
-pub struct OwnedMutexGuard&lt;T: ?Sized&gt;
-          </code></pre>
-
-        <p>std::sync::Mutex&lt;T&gt;なやつからlock().awaitで取れるやつ</p>
-        <p>OwnedMutexGuard&lt;T&gt;: ライフタイムパラメータがない。</p>
-        <p>所有権に基づいて動作し、非同期コンテキストで使用される</p>
     </div>
 
     <div class="slide">
