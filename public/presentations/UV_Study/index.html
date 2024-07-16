@@ -209,7 +209,7 @@ pub struct MutexGuard&lt;'a, T: ?Sized + 'a&gt;
 pub struct OwnedMutexGuard&lt;T: ?Sized&gt;
           </code></pre>
 
-        <p>Mutex&lt;T&gt;なやつからlock().awaitで取れるやつ</p>
+        <p>std::sync::Mutex&lt;T&gt;なやつからlock().awaitで取れるやつ</p>
         <p>OwnedMutexGuard&lt;T&gt;: ライフタイムパラメータがない。</p>
         <p>所有権に基づいて動作し、非同期コンテキストで使用される</p>
     </div>
@@ -221,7 +221,7 @@ pub struct OwnedMutexGuard&lt;T: ?Sized&gt;
 pub struct OwnedMutexGuard&lt;T: ?Sized&gt;
           </code></pre>
 
-        <p>Mutex&lt;T&gt;なやつからlock().awaitで取れるやつ</p>
+        <p>tokio::async::Mutex&lt;T&gt;なやつからlock().awaitで取れるやつ</p>
         <p>OwnedMutexGuard&lt;T&gt;: ライフタイムパラメータがない。</p>
         <p>所有権に基づいて動作し、非同期コンテキストで使用される</p>
     </div>
