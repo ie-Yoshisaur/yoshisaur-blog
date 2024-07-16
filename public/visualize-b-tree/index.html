@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B-Tree Visualizer with Canvas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #controls {
+            margin-bottom: 20px;
+        }
+        input, button {
+            margin: 5px;
+            padding: 5px;
+        }
+        #canvas {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>B-Tree Visualizer</h1>
+    <div id="controls">
+        <input type="number" id="input" placeholder="Enter Value">
+        <button onclick="insert()">Insert</button>
+        <button onclick="remove()">Delete</button>
+        <button onclick="search()">Search</button>
+        <button onclick="resetDrawing()">Reset Drawing</button>
+        <button onclick="resetTree()">Reset Tree</button>
+    </div>
+    <canvas id="canvas" width="1000" height="800"></canvas>
+
+    <script>
+        class BTreeNode {
+            constructor(order, leaf = true) {
+                this.keys = [];
+                this.children = [];
+                this.leaf = leaf;
+                this.order = order;
+            }
+        }
+        
+        class BTree {
+            constructor(order) {
+                this.root = new BTreeNode(order);
+                this.order = order;
+            }
+        
+            search(k, node = this.root) {
+                let i = 0;
+                while (i < node.keys.length && k > node.keys[i]) i++;
+                if (i < node.keys.length && k === node.keys[i]) return node;
+                if (node.leaf) return null;
+                return this.search(k, node.children[i]);
+            }
+        
+            insert(k) {
+                let r = this.root;
+                if (r.keys.length === this.order - 1) {
+                    let s = new BTreeNode(this.order, false);
+                    this.root = s;
+                    s.children.push(r);
+                    this.splitChild(s, 0);
+                    this.insertNonFull(s, k);
+                } else {
+                    this.insertNonFull(r, k);
+                }
+            }
+        
+            insertNonFull(node, k) {
+                let i = node.keys.length - 1;
+                if (node.leaf) {
+                    node.keys.push(0);
+                    while (i >= 0 && k < node.keys[i]) {
+                        node.keys[i + 1] = node.keys[i];
+                        i--;
+                    }
+                    node.keys[i + 1] = k;
+                } else {
+                    while (i >= 0 && k < node.keys[i]) i--;
+                    i++;
+                    if (node.children[i].keys.length === this.order - 1) {
+                        this.splitChild(node, i);
+                        if (k > node.keys[i]) i++;
+                    }
+                    this.insertNonFull(node.children[i], k);
+                }
+            }
+        
+            splitChild(parent, i) {
+                let y = parent.children[i];
+                let z = new BTreeNode(this.order, y.leaf);
+                let mid = Math.floor((this.order - 1) / 2);
+                z.keys = y.keys.splice(mid + 1);
+                parent.keys.splice(i, 0, y.keys.splice(mid, 1)[0]);
+                if (!y.leaf) {
+                    z.children = y.children.splice(mid + 1);
+                }
+                parent.children.splice(i + 1, 0, z);
+            }
+        
+            delete(k) {
+                this.deleteKey(this.root, k);
+                if (this.root.keys.length === 0 && !this.root.leaf) {
+                    this.root = this.root.children[0];
+                }
+            }
+        
+            deleteKey(node, k) {
+                let idx = this.findKey(node, k);
+                if (idx < node.keys.length && node.keys[idx] === k) {
+                    if (node.leaf) {
+                        node.keys.splice(idx, 1);
+                    } else {
+                        this.deleteInternal(node, k, idx);
+                    }
+                } else {
+                    if (node.leaf) {
+                        return;
+                    }
+                    let flag = idx === node.keys.length;
+                    if (node.children[idx].keys.length < Math.ceil(this.order / 2) - 1) {
+                        this.fill(node, idx);
+                    }
+                    if (flag && idx > node.keys.length) {
+                        this.deleteKey(node.children[idx - 1], k);
+                    } else {
+                        this.deleteKey(node.children[idx], k);
+                    }
+                }
+            }
+        
+            deleteInternal(node, k, idx) {
+                if (node.leaf) {
+                    if (idx < node.keys.length && node.keys[idx] === k) {
+                        node.keys.splice(idx, 1);
+                        return;
+                    }
+                    return;
+                }
+        
+                if (node.children[idx].keys.length >= Math.ceil(this.order / 2)) {
+                    let pred = this.getPred(node, idx);
+                    node.keys[idx] = pred;
+                    this.deleteKey(node.children[idx], pred);
+                } else if (node.children[idx + 1].keys.length >= Math.ceil(this.order / 2)) {
+                    let succ = this.getSucc(node, idx);
+                    node.keys[idx] = succ;
+                    this.deleteKey(node.children[idx + 1], succ);
+                } else {
+                    this.merge(node, idx);
+                    this.deleteKey(node.children[idx], k);
+                }
+            }
+        
+            getPred(node, idx) {
+                let cur = node.children[idx];
+                while (!cur.leaf) {
+                    cur = cur.children[cur.keys.length];
+                }
+                return cur.keys[cur.keys.length - 1];
+            }
+        
+            getSucc(node, idx) {
+                let cur = node.children[idx + 1];
+                while (!cur.leaf) {
+                    cur = cur.children[0];
+                }
+                return cur.keys[0];
+            }
+        
+            fill(node, idx) {
+                if (idx !== 0 && node.children[idx - 1].keys.length >= Math.ceil(this.order / 2)) {
+                    this.borrowFromPrev(node, idx);
+                } else if (idx !== node.keys.length && node.children[idx + 1].keys.length >= Math.ceil(this.order / 2)) {
+                    this.borrowFromNext(node, idx);
+                } else {
+                    if (idx !== node.keys.length) {
+                        this.merge(node, idx);
+                    } else {
+                        this.merge(node, idx - 1);
+                    }
+                }
+            }
+        
+            borrowFromPrev(node, idx) {
+                let child = node.children[idx];
+                let sibling = node.children[idx - 1];
+        
+                child.keys.unshift(node.keys[idx - 1]);
+                node.keys[idx - 1] = sibling.keys.pop();
+        
+                if (!child.leaf) {
+                    child.children.unshift(sibling.children.pop());
+                }
+            }
+        
+            borrowFromNext(node, idx) {
+                let child = node.children[idx];
+                let sibling = node.children[idx + 1];
+        
+                child.keys.push(node.keys[idx]);
+                node.keys[idx] = sibling.keys.shift();
+        
+                if (!child.leaf) {
+                    child.children.push(sibling.children.shift());
+                }
+            }
+        
+            merge(node, idx) {
+                let child = node.children[idx];
+                let sibling = node.children[idx + 1];
+        
+                child.keys.push(node.keys[idx]);
+                child.keys = child.keys.concat(sibling.keys);
+                
+                if (!child.leaf) {
+                    child.children = child.children.concat(sibling.children);
+                }
+        
+                node.keys.splice(idx, 1);
+                node.children.splice(idx + 1, 1);
+            }
+        
+            findKey(node, k) {
+                let idx = 0;
+                while (idx < node.keys.length && node.keys[idx] < k) {
+                    idx++;
+                }
+                return idx;
+            }
+        }
+
+        let tree = new BTree(5);
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let highlightedNode = null;
+        let highlightedKey = null;
+
+        let drawing = false;
+        let prevX = 0;
+        let prevY = 0;
+
+        function initializeTree() {
+            tree = new BTree(5);
+            for (let i = 0; i <= 48; i += 2) {
+                tree.insert(i);
+            }
+            updateVisualization();
+        }
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth - 40;
+            canvas.height = window.innerHeight - 150;
+            updateVisualization();
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        canvas.addEventListener('mousedown', (event) => {
+            drawing = true;
+            prevX = event.offsetX;
+            prevY = event.offsetY;
+        });
+
+        canvas.addEventListener('mousemove', (event) => {
+            if (drawing) {
+                const x = event.offsetX;
+                const y = event.offsetY;
+                drawLine(prevX, prevY, x, y);
+                prevX = x;
+                prevY = y;
+            }
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            drawing = false;
+        });
+
+        canvas.addEventListener('mouseout', () => {
+            drawing = false;
+        });
+
+        function drawLine(x1, y1, x2, y2) {
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+        }
+
+        function resetDrawing() {
+            updateVisualization();
+        }
+
+        function insert() {
+            const value = parseInt(document.getElementById('input').value);
+            if (!isNaN(value)) {
+                tree.insert(value);
+                document.getElementById('input').value = '';
+                highlightedNode = null;
+                highlightedKey = null;
+                updateVisualization();
+            }
+        }
+
+        function remove() {
+            const value = parseInt(document.getElementById('input').value);
+            if (!isNaN(value)) {
+                tree.delete(value);
+                document.getElementById('input').value = '';
+                highlightedNode = null;
+                highlightedKey = null;
+                updateVisualization();
+            }
+        }
+
+        function search() {
+            const value = parseInt(document.getElementById('input').value);
+            if (!isNaN(value)) {
+                let node = tree.search(value);
+                if (node) {
+                    highlightedNode = node;
+                    highlightedKey = value;
+                    updateVisualization();
+                } else {
+                    alert('Value not found!');
+                }
+                document.getElementById('input').value = '';
+            }
+        }
+
+        function updateVisualization() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.lineWidth = 1; // デフォルトの線の太さにリセット
+            if (tree.root) {
+                const treeHeight = getTreeHeight(tree.root);
+                const verticalSpacing = canvas.height / (treeHeight + 1);
+                drawNode(tree.root, canvas.width / 2, verticalSpacing, canvas.width, 0, verticalSpacing);
+            }
+        }
+
+        function getTreeHeight(node) {
+            if (node.leaf) return 1;
+            return 1 + Math.max(...node.children.map(getTreeHeight));
+        }
+
+        function drawNode(node, x, y, availableWidth, minX, verticalSpacing) {
+            const boxHeight = 30;
+            const boxMargin = 5;
+            const keyMargin = 5;
+
+            let totalWidth = getNodeWidth(node);
+
+            let startX = Math.max(minX, x - totalWidth / 2);
+            let endX = startX + totalWidth;
+
+            if (endX > minX + availableWidth) {
+                startX = minX + availableWidth - totalWidth;
+                endX = minX + availableWidth;
+            }
+
+            const nodeStartX = startX;
+            const nodeEndX = endX;
+
+            node.keys.forEach((key, index) => {
+                const boxWidth = ctx.measureText(key.toString()).width + keyMargin * 2;
+                ctx.fillStyle = 'white';
+                ctx.fillRect(startX, y - boxHeight / 2, boxWidth, boxHeight);
+                ctx.strokeStyle = 'black';
+                ctx.strokeRect(startX, y - boxHeight / 2, boxWidth, boxHeight);
+
+                if (node === highlightedNode && key === highlightedKey) {
+                    ctx.save();
+                    ctx.strokeStyle = 'red';
+                    ctx.lineWidth = 3;
+                    ctx.shadowColor = 'red';
+                    ctx.shadowBlur = 10;
+                    ctx.strokeRect(startX, y - boxHeight / 2, boxWidth, boxHeight);
+                    ctx.restore();
+                }
+
+                ctx.fillStyle = 'black';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(key.toString(), startX + boxWidth / 2, y);
+
+                startX += boxWidth + boxMargin;
+            });
+
+            if (!node.leaf) {
+                const childY = y + verticalSpacing;
+                const childWidth = availableWidth / node.children.length;
+
+                node.children.forEach((child, index) => {
+                    const childX = minX + childWidth * (index + 0.5);
+                    const childNodeWidth = getNodeWidth(child);
+                    const childStartX = childX - childNodeWidth / 2;
+                    const childEndX = childStartX + childNodeWidth;
+
+                    ctx.beginPath();
+                    ctx.lineWidth = 1;
+                    if (index === 0) {
+                        ctx.moveTo(nodeStartX, y + boxHeight / 2);
+                        ctx.lineTo(childStartX, childY - boxHeight / 2);
+                    } else if (index === node.children.length - 1) {
+                        ctx.moveTo(nodeEndX, y + boxHeight / 2);
+                        ctx.lineTo(childEndX, childY - boxHeight / 2);
+                    } else {
+                        const parentKeyX = nodeStartX + (index * (nodeEndX - nodeStartX) / node.keys.length);
+                        ctx.moveTo(parentKeyX, y + boxHeight / 2);
+                        ctx.lineTo((childStartX + childEndX) / 2, childY - boxHeight / 2);
+                    }
+                    ctx.stroke();
+
+                    drawNode(child, childX, childY, childWidth, minX + childWidth * index, verticalSpacing);
+                });
+            }
+        }
+
+        function getNodeWidth(node) {
+            const boxMargin = 5;
+            const keyMargin = 5;
+            let totalWidth = 0;
+            node.keys.forEach(key => {
+                totalWidth += ctx.measureText(key.toString()).width + keyMargin * 2 + boxMargin;
+            });
+            return totalWidth - boxMargin;
+        }
+
+        function resetTree() {
+            tree = new BTree(5);
+            highlightedNode = null;
+            highlightedKey = null;
+            updateVisualization();
+        }
+
+        initializeTree();
+    </script>
+</body>
+</html>
